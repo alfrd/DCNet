@@ -39,18 +39,21 @@ public class DCNet {
 		if(b == 1) {
 			bOne();
 			String myB = makeHexString(myDist).toUpperCase();
-			String anonM = makeHexString(anonMessage).toUpperCase();
-			System.out.println("Output: " + myB + anonM + ", when b = " + b);
+			System.out.println("Output: " + myB + " when b = " + b);
+			
 		} else {
 			bZero();
 			String myB = makeHexString(myDist).toUpperCase();
-			System.out.println("Output: " + myB + " when b = " + b);
+			String anonM = makeHexString(anonMessage).toUpperCase();
+			StringBuilder sb = new StringBuilder(anonM);
+			while(sb.length() < 4) {
+				sb.append("0");
+			}
+			anonM = sb.toString();
+			System.out.println("Output: " + myB + anonM + ", when b = " + b);
 		}
 		
-		
-		
 	}
-	
 	
 	public void bZero() {
 		for(int i = 0; i < 16; i++) {
@@ -60,16 +63,7 @@ public class DCNet {
 			anonMessage[i] = xorDist^xorSecret;
 			
 		}
-//		System.out.print("My broadcast: ");
-//		for(int j = 0; j < myDist.length; j++) {
-//			
-//			System.out.print(myDist[j]);
-//		}
-//		
-//		System.out.print(" Anonymous message: ");
-//		for(int j = 0; j < anonMessage.length; j++) {
-//			System.out.print(anonMessage[j]);
-//		}
+
 	}
 	
 	public void bOne() {
@@ -92,11 +86,6 @@ public class DCNet {
 				anonMessage[i] = xorDist^xorSecret;
 			}
 		}
-//		System.out.println("My broadcast: ");
-//		for(int j = 0; j < myDist.length; j++) {
-//			
-//			System.out.print(myDist[j]);
-//		}
 		
 	}
 	
@@ -109,11 +98,6 @@ public class DCNet {
 			int bit = getBitAtIndexN(i,intOfHex);
 			bitArray[bitArray.length - i - 1] = bit;
 		}
-//			System.out.print("hex: " + hex + ", bit: ");
-//			for(int j = 0; j < bitArray.length; j++) {
-//				System.out.print(bitArray[j]);
-//			}
-//			System.out.println("");
 		return bitArray;
 	}
 	
@@ -139,7 +123,8 @@ public class DCNet {
 		
 		DCNet dcn1 = new DCNet("27C2", "0879", "35F6", "1A4D", "27BC", 1);
 		DCNet dcn0 = new DCNet("0C73", "80C1", "A2A9", "92F5", "9B57", 0);
+		DCNet dctest = new DCNet("BF0D", "3C99", "186F", "2EAD", "62AB", 0);
+		DCNet dctest2 = new DCNet("D75C", "EE87", "C568", "FCB3", "4674", 1);
+		DCNet dctest3 = new DCNet("75F5", "B1AC", "67C1", "A398", "00BC", 0);
 	}
 }
-
-	
